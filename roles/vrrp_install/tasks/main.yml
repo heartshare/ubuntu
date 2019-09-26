@@ -1,0 +1,7 @@
+---
+- name: Install vrrp
+  apt:
+    name: keepalived
+    state: present
+  environment:
+    RUNLEVEL: 1

@@ -1,0 +1,6 @@
+---
+- hosts: ubuntuvrrp
+  gather_facts: false
+  roles:
+    - { role: vrrp_install, tags: ['vrrp','vrrp_install'] }
+    - { role: vrrp_configure, tags: ['vrrp','vrrp_configure'] }

@@ -1,0 +1,7 @@
+[ubuntuvrrp]
+ubuntu1 ansible_host=ubuntu1 ansible_user=root ansible_connection=ssh
+ubuntu2 ansible_host=ubuntu2 ansible_user=root ansible_connection=ssh
+ubuntu3 ansible_host=ubuntu3 ansible_user=root ansible_connection=ssh
+
+[ubuntucluster:children]
+ubuntuvrrp
