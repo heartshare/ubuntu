@@ -5,4 +5,5 @@
 - name: Generate conf
   template:
     src: keepalived.conf.j2
-    dest: /tmp/conf/keepalived.conf
+    dest: /etc/keepalived/keepalived.conf
+  notify: restart_keepalived
