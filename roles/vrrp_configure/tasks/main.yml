@@ -1,4 +1,7 @@
 ---
+- set_fact:
+    init_value: 100
+
 - name: Generate conf
   template:
     src: keepalived.conf.j2

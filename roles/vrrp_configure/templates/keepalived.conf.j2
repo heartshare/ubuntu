@@ -12,7 +12,7 @@ state BACKUP
 interface enp0s8
 virtual_router_id 10
 {% if inventory_hostname in groups['ubuntuvrrp'][0] %}
-priority 100
+priority {{ init_value }}
 {% else %}
 priority 90
 {% endif %}
@@ -30,9 +30,10 @@ unicast_peer {
 }
 
         virtual_ipaddress {
-        10.25.128.55 dev enp0s8 label enp0s8:vip1
-        10.25.128.56 dev enp0s8 label enp0s8:vip2
-        10.25.128.57 dev enp0s8 label enp0s8:vip3
-        }
+	{% for host in groups['ubuntuvrrp'] %}
+10.25.128.10{{loop.index}} dev enp0s8 label enp0s8:vip{{loop.index}}
+        {{ loop.index + 100 }}
+        {% endfor %}
+}
 
 }
