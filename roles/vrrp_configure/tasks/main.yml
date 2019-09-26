@@ -1,0 +1,5 @@
+---
+- name: Generate conf
+  template:
+    src: keepalived.conf.j2
+    dest: /tmp/conf/keepalived.conf

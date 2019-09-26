@@ -1,0 +1,38 @@
+########################
+## VRRP configuration ##
+########################
+
+vrrp_instance failover_test {
+
+{% if inventory_hostname in groups['ubuntuvrrp'][0] %}
+state MASTER
+{% else %}
+state BACKUP
+{% endif %}
+interface enp0s8
+virtual_router_id 10
+{% if inventory_hostname in groups['ubuntuvrrp'][0] %}
+priority 100
+{% else %}
+priority 90
+{% endif %}
+advert_int 4
+
+authentication {
+auth_type PASS
+auth_pass 1111
+}
+
+unicast_peer {
+{% for host in groups['ubuntuvrrp'] %}
+  {{ hostvars[host].ansible_host }}
+{% endfor %}
+}
+
+        virtual_ipaddress {
+        10.25.128.55 dev enp0s8 label enp0s8:vip1
+        10.25.128.56 dev enp0s8 label enp0s8:vip2
+        10.25.128.57 dev enp0s8 label enp0s8:vip3
+        }
+
+}
