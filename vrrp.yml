@@ -5,7 +5,7 @@
     - { role: vrrp_install, tags: ['vrrp','vrrp_install'] }
     - { role: vrrp_configure, tags: ['vrrp','vrrp_configure'] }
 
-- hosts: ubuntucluster
+- hosts: mtenant1
   gather_facts: false
   roles:
     - { role: regexp, tags: ['regexp'] }

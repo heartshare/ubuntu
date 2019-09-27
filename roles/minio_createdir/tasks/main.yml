@@ -3,5 +3,5 @@
   file:
     path: "/mdata{{ inventory_hostname | regex_search('[0-9]{1,}') }}"
     state: directory
-    owner: minio
-    group: minio
+    owner: minio-user
+    group: minio-user

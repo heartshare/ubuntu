@@ -8,7 +8,7 @@
   copy:
     src: config.json
     dest: /root/.minio/config.json
-    owner: minio
-    group: minio
+    owner: minio-user
+    group: minio-user
   notify: 
     - restart minio

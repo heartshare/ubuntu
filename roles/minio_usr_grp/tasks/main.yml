@@ -1,11 +1,11 @@
 ---
 - name: Create minio group
   group:
-    name: minio
+    name: minio-user
     state: present
 
 - name: Create minio user
   user:
-    name: minio
-    group: minio
+    name: minio-user
+    group: minio-user
     comment: User for working with minio cluster

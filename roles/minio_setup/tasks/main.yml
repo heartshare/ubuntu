@@ -3,12 +3,14 @@
   copy:
     src: minio
     dest: /usr/sbin/minio
+    owner: minio-user
+    group: minio-user
     mode: a+rwx
 
-- name: Create data dir for minio
-  file:
-    path: /mdata
-    state: directory
+#- name: Create data dir for minio
+#  file:
+#    path: /mdata
+#    state: directory
 
 - name: Upload minio.service to each node
   copy:
@@ -16,6 +18,6 @@
     dest: /etc/systemd/system
 
 - name: Upload minio default
-  copy:
+  template:
     src: minio.default
     dest: /etc/default/minio
