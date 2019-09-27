@@ -1,13 +1,11 @@
 {
-        " version" : " 22" ,
-        " credential" : {
-                " accessKey" : " zaq1xsw2cde3" ,
-                " secretKey" : " 123456789" 
+        "version" : "22" ,
+        "credential" : {
+                "accessKey" : "zaq1xsw2cde3" ,
+                "secretKey" : "123456789",
+                "status": "enabled"
         },
-        " region" : " " ,
-        " browser" : " on" ,
-        " domain" : " " ,
-.
-.
-.
+        "region" : "" ,
+        "browser" : "on" ,
+        "domain" : ""
 }
