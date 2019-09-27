@@ -1,7 +1,7 @@
 ---
 - name: Create data dir for minio
   file:
-    path: "/mdata{{ inventory_hostname | regex_search('[0-9]{1,}') }}"
+    path: "/minio/mdata{{ inventory_hostname | regex_search('[0-9]{1,}') }}"
     state: directory
     owner: minio-user
     group: minio-user

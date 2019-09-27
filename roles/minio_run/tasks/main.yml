@@ -4,6 +4,10 @@
     path: /root/.minio
     state: directory
 
+- name: Force restart systemd
+  systemd:
+    daemon_reexec: yes
+
 - name: Upload config json to each node
   copy:
     src: config.json

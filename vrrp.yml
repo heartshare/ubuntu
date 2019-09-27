@@ -5,10 +5,9 @@
     - { role: vrrp_install, tags: ['vrrp','vrrp_install'] }
     - { role: vrrp_configure, tags: ['vrrp','vrrp_configure'] }
 
-- hosts: mtenant1
+- hosts: all
   gather_facts: false
   roles:
-    - { role: regexp, tags: ['regexp'] }
     - { role: minio_usr_grp, tags: ['musrgrp'] }
     - { role: minio_setup, tags: ['msetup']}
     - { role: minio_createdir, tags: ['mcreate']}

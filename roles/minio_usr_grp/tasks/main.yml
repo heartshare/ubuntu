@@ -8,4 +8,5 @@
   user:
     name: minio-user
     group: minio-user
+    state: present
     comment: User for working with minio cluster

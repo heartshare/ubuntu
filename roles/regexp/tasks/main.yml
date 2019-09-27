@@ -1,4 +1,0 @@
----
-- name: Regexp
-  debug:
-    msg: "{{ inventory_hostname | regex_search('[0-9]{1,}') }}"
