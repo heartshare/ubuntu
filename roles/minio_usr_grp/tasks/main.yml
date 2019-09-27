@@ -1,0 +1,11 @@
+---
+- name: Create minio group
+  group:
+    name: minio
+    state: present
+
+- name: Create minio user
+  user:
+    name: minio
+    group: minio
+    comment: User for working with minio cluster

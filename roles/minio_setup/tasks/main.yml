@@ -1,0 +1,21 @@
+---
+- name: Upload minio binary to each nodes
+  copy:
+    src: minio
+    dest: /usr/sbin/minio
+    mode: a+rwx
+
+- name: Create data dir for minio
+  file:
+    path: /mdata
+    state: directory
+
+- name: Upload minio.service to each node
+  copy:
+    src: minio.service
+    dest: /etc/systemd/system
+
+- name: Upload minio default
+  copy:
+    src: minio.default
+    dest: /etc/default/minio

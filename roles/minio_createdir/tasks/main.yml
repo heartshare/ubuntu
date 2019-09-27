@@ -1,0 +1,7 @@
+---
+- name: Create data dir for minio
+  file:
+    path: /mdata
+    state: directory
+    owner: minio
+    group: minio

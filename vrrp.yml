@@ -4,3 +4,11 @@
   roles:
     - { role: vrrp_install, tags: ['vrrp','vrrp_install'] }
     - { role: vrrp_configure, tags: ['vrrp','vrrp_configure'] }
+
+- hosts: ubuntucluster
+  gather_facts: false
+  roles:
+    - { role: minio_usr_grp, tags: ['musrgrp'] }
+    - { role: minio_setup, tags: ['msetup']}
+    - { role: minio_createdir, tags: ['mcreate']}
+    - { role: minio_run, tags: ['mrun'] }

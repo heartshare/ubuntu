@@ -1,0 +1,14 @@
+---
+- name: Create dir for minio conf
+  file:
+    path: /home/minio/.minio
+    state: directory
+
+- name: Upload config json to each node
+  copy:
+    src: config.json
+    dest: /home/minio/.minio/config.json
+    owner: minio
+    group: minio
+  notify: 
+    - restart minio
