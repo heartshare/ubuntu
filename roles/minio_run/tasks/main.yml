@@ -14,5 +14,8 @@
     dest: /root/.minio/config.json
     owner: minio-user
     group: minio-user
-  notify: 
-    - restart minio
+
+- name: Restart minio service
+  service:
+    name: minio
+    state: restarted

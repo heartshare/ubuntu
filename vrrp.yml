@@ -6,9 +6,10 @@
     - { role: vrrp_configure, tags: ['vrrp','vrrp_configure'] }
 
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   roles:
-    - { role: minio_usr_grp, tags: ['musrgrp'] }
-    - { role: minio_setup, tags: ['msetup']}
-    - { role: minio_createdir, tags: ['mcreate']}
-    - { role: minio_run, tags: ['mrun'] }
+    - { role: add_record_to_hosts, tags: ['minio','hosts'] } 
+    - { role: minio_usr_grp, tags: ['minio','musrgrp'] }
+    - { role: minio_setup, tags: ['minio','msetup']}
+    - { role: minio_createdir, tags: ['minio','mcreate']}
+    - { role: minio_run, tags: ['minio','mrun'] }
