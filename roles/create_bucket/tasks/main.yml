@@ -1,0 +1,7 @@
+---
+- name: Create bucket
+  s3_bucket:
+    name: mybucket
+    aws_access_key: zaq1xsw2cde3
+    aws_secret_key: 123456789
+    s3_url: 'http://172.0.5.104:9199'

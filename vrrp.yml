@@ -11,5 +11,6 @@
     - { role: add_record_to_hosts, tags: ['minio','hosts'] } 
     - { role: minio_usr_grp, tags: ['minio','musrgrp'] }
     - { role: minio_setup, tags: ['minio','msetup']}
+    - { role: mc_setup, tags: ['minio','mcsetup'] }
     - { role: minio_createdir, tags: ['minio','mcreate']}
     - { role: minio_run, tags: ['minio','mrun'] }

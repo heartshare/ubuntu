@@ -1,0 +1,7 @@
+- name: Upload minio binary to each nodes
+  copy:
+    src: mc
+    dest: /usr/sbin/mc
+    owner: minio-user
+    group: minio-user
+    mode: a+rwx

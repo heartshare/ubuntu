@@ -7,17 +7,16 @@
     group: minio-user
     mode: a+rwx
 
-#- name: Create data dir for minio
-#  file:
-#    path: /mdata
-#    state: directory
-
 - name: Upload minio.service to each node
   copy:
     src: minio.service
-    dest: /etc/systemd/system
+    dest: /etc/systemd/system/minio@.service
 
 - name: Upload minio default
   template:
     src: minio.default
-    dest: /etc/default/minio
+    dest: "/etc/default/minio{{ item.tenantid }}"
+    force: yes
+  with_items:
+    - { tenantid: 1, tenantport: "9001" }
+    - { tenantid: 2, tenantport: "9002" }

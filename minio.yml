@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  gather_facts: false
+  roles:
+    - { role: create_bucket, tags: ['createbucket'] }
+    - { role: create_user, tags: ['createuser'] }

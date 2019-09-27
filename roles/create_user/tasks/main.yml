@@ -1,0 +1,14 @@
+---
+- name: Create new user
+  iam:
+    aws_access_key: zaq1xsw2cde3
+    aws_secret_key: 123456789
+    iam_type: user
+    name: toptop
+    state: present
+    password: toptop
+    access_key_state: create
+  register: access_key
+
+- debug:
+    msg: "{{ register }}"
