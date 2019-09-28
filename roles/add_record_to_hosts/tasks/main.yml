@@ -16,3 +16,10 @@
     line: "{{ item }}"
     state: present
   with_items: "{{ my_list }}"
+
+
+- name: Remove localhost from /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '127.0.1.1\s+ubuntu[0-9]{1,}'
+    state: absent

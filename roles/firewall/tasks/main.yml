@@ -1,0 +1,12 @@
+---
+- name: Change ufw rules allow tcp
+  ufw:
+    rule: allow
+    port: 9000:9100
+    proto: tcp
+
+- name: Change ufw rules allow udp
+  ufw:
+    rule: allow
+    port: 9000:9100
+    proto: udp
