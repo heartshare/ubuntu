@@ -10,5 +10,8 @@ mc config host rm tenant2
 # create bucket in tenant1
 mc mb tenant1/clicreate
 
-# upload file in to tenant/bucket
+# upload file 'syslog' into tenant/bucket
 mc cp /var/log/syslog tenant1/forpic
+
+# remove file 'syslog' from tenant/bucket
+mc rm tenant1/forpic/syslog
