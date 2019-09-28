@@ -6,7 +6,7 @@ After=network-online.target
 AssertFileIsExecutable=/usr/sbin/minio
 
 [Service]
-Type=forking
+Type=idle
 WorkingDirectory=/usr/local/
 User=minio-user
 Group=minio-user
@@ -19,8 +19,8 @@ ExecStart=/usr/sbin/minio server $MINIO_OPTS $MINIO_VOLUMES
 #ExecStart=/bin/bash -ac '. /etc/default/minio.d/%i/minio exec /usr/sbin/minio server $MINIO_OPTS $MINIO_VOLUMES'
 
 # Let systemd restart this service always
-Restart=always
-RestartSec=20
+#Restart=always
+#RestartSec=20
 
 # Specifies the maximum file descriptor number that can be opened by this process
 LimitNOFILE=65536
