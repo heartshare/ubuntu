@@ -2,9 +2,6 @@
 ## VRRP configuration ##
 ########################
 {% set myvar = 100 %}
-{% set grpname1 = group_names %}
-{% set grpname2 = {{ group_names }} %}
-{% set grpname3 = "{{ group_names }}" %}
 
 vrrp_script chk_http_port {
         script "/usr/bin/killall -0 nginx"
@@ -14,17 +11,17 @@ vrrp_script chk_http_port {
 
 vrrp_instance failover_test {
 
-{% if inventory_hostname in groups[grpname][0] %}
+{% if inventory_hostname in groups[group_names.0] %}
 state MASTER
 {% else %}
 state BACKUP
 {% endif %}
 interface enp0s8
 virtual_router_id 10
-{% if inventory_hostname in groups[grpname][0] %}
+{% if inventory_hostname in groups[group_names.0] %}
 priority {{ myvar }}
 {% else %}
-priority {{ myvar - groups[grpname].index(inventory_hostname) }}
+priority {{ myvar - groups[group_names.0].index(inventory_hostname) }}
 {% endif %}
 advert_int 1
 
@@ -34,13 +31,13 @@ auth_pass 1111
 }
 
 unicast_peer {
-{% for host in groups[grpname] %}
-  {{ hostvars[host].ansible_host }}
+{% for host in groups[group_names.0] %}
+  {{ hostvars[host]['ansible_host'] }}
 {% endfor %}
 }
 
         virtual_ipaddress {
-	{% for host in groups[grpname] %}
+	{% for host in groups[group_names.0] %}
 172.0.5.20{{loop.index}} dev enp0s8 label enp0s8:vip{{loop.index}}
         {% endfor %}
 }
