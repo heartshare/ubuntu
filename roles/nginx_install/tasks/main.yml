@@ -1,0 +1,14 @@
+---
+#- name: Add PPA for Nginx.
+#  apt_repository:
+#    repo: 'ppa:nginx/development'
+#    state: present
+#    update_cache: true
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+  environment:
+    RUNLEVEL: 1
