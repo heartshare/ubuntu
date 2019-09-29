@@ -1,0 +1,6 @@
+---
+- hosts: nginxsrv
+  gather_facts: false
+  roles:
+    - { role: nginx_vrrp_install, tags: ['vrrp','nginxvrrpinstall'] }
+    - { role: nginx_vrrp_configure, tags: ['vrrp','nginxvrrpconfigure'] }
