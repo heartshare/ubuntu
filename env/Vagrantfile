@@ -4,7 +4,34 @@ Vagrant.configure("2") do |config|
 	$cluster_net = "172.0.5."
 	$vbox_img = "ubuntu/xenial64"
 	$cluster_name_prefix = "ubuntu"
-	$domain = "my.home"
+	$domain = "my.home"	
+	$nginx_begin_ip_range = 150
+	$nginx_name_prefix = "nginx"
+	
+	#Run ubuntu cluster
+	(1..2).each do |i|
+		config.vm.define "#{$nginx_name_prefix}#{i}" do |ubuntu|
+			ubuntu.vm.box = "#{$vbox_img}"
+			ubuntu.vm.hostname = "#{$nginx_name_prefix}#{i}.#{$domain}"
+			ubuntu.vm.network :private_network, ip: "#{$cluster_net}#{$nginx_begin_ip_range+i}"
+			ubuntu.vbguest.auto_update = false
+			ubuntu.vm.provider :virtualbox do |vb|
+				vb.customize [
+					"modifyvm", :id,
+					"--cpuexecutioncap", "80",
+					"--memory", "1024",
+					"--cpus", "2",
+					"--audio", "none",
+				]
+			ubuntu.vm.provision "shell", inline: <<-SHELL
+				sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config
+				sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+				echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrKdP2oy41laB4o/JURkwG1byQIK24N/j792c5ZmA5SNpHEMrgym1J17rR9K+CQ29X7DrK1gzcjq8+RkTnH1J+N86SV9zzyzVSkyz2GyVUDDy0EudrhRzPSc1bVf4xIr5vBb10aXiBC40cY2jXewFJypkKbhRK32ZTf2nFfslZHObAhpe4jCJOEDIZIKy6l9RkMxMEKLy7N4X0cf7ggm6gnxYlfwsN4FL4u73bZ5H4N6/i+lQp8a55sYzu+ESPcezcJpMAM5CYnDUQIOF4YpakJpCqezEacNPFXGTcRYqyQvGDu0jNAqcStjmN3C6ToWabtxdVFjDS3/M+HJrm2X/z root@myVM' >> ~/.ssh/authorized_keys
+				systemctl restart ssh || systemctl restart sshd
+			SHELL
+			end
+		end
+	end
 	
 	#Run ubuntu cluster
 	(1..6).each do |i|
@@ -17,7 +44,7 @@ Vagrant.configure("2") do |config|
 				vb.customize [
 					"modifyvm", :id,
 					"--cpuexecutioncap", "80",
-					"--memory", "20248",
+					"--memory", "1024",
 					"--cpus", "2",
 					"--audio", "none",
 				]
