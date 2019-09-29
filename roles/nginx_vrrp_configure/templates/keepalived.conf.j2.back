@@ -11,17 +11,17 @@ vrrp_script chk_http_port {
 
 vrrp_instance failover_test {
 
-{% if inventory_hostname in groups['ubuntuvrrp'][0] %}
+{% if inventory_hostname in groups[group_names.0] %}
 state MASTER
 {% else %}
 state BACKUP
 {% endif %}
 interface enp0s8
 virtual_router_id 10
-{% if inventory_hostname in groups['ubuntuvrrp'][0] %}
+{% if inventory_hostname in groups[group_names.0] %}
 priority {{ myvar }}
 {% else %}
-priority {{ myvar - groups['ubuntuvrrp'].index(inventory_hostname) }}
+priority {{ myvar - groups[group_names.0].index(inventory_hostname) }}
 {% endif %}
 advert_int 1
 
@@ -31,13 +31,13 @@ auth_pass 1111
 }
 
 unicast_peer {
-{% for host in groups['ubuntuvrrp'] %}
-  {{ hostvars[host].ansible_host }}
+{% for host in groups[group_names.0] %}
+  {{ hostvars[host]['ansible_host'] }}
 {% endfor %}
 }
 
         virtual_ipaddress {
-	{% for host in groups['ubuntuvrrp'] %}
+	{% for host in groups[group_names.0] %}
 172.0.5.20{{loop.index}} dev enp0s8 label enp0s8:vip{{loop.index}}
         {% endfor %}
 }

@@ -9,5 +9,5 @@
     - { role: mc_setup, tags: ['minio','mcsetup'] }
     - { role: minio_createdir, tags: ['minio','mcreate']}
     - { role: minio_run, tags: ['minio','mrun'] }
-    - { role: create_bucket, tags: ['createbucket'] }
-    - { role: create_user, tags: ['createuser'] }
+#    - { role: create_bucket, tags: ['createbucket'] }
+#    - { role: create_user, tags: ['createuser'] }
