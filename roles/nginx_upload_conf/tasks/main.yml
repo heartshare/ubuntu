@@ -13,5 +13,18 @@
     - { tenantid: 2, tenantport: 9002}
   register: confout
 
-- debug:
-    msg: "{{ confout.invocation }}"
+- name: Create a symbolic link
+  file:
+    src: "{{ item.path }}"
+    dest: "/etc/nginx/sites-enabled/{{ item.path | regex_replace('/etc/nginx/sites-available/', '') }}"
+    state: link
+  with_items: "{{ confout.results }}"
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+#- debug:
+#    msg: "{{ item.path }}"
+#  with_items: "{{ confout.results }}"
