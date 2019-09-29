@@ -11,3 +11,7 @@
   with_items:
     - { tenantid: 1, tenantport: 9001}
     - { tenantid: 2, tenantport: 9002}
+  register: confout
+
+- debug:
+    msg: "{{ confout.invocation }}"
