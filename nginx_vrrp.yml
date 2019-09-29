@@ -3,4 +3,4 @@
   gather_facts: false
   roles:
     - { role: nginx_vrrp_install, tags: ['vrrp','nginxvrrpinstall'] }
-    - { role: nginx_vrrp_configure, tags: ['vrrp','nginxvrrpconfigure'] }
+    - { role: nginx_vrrp_configure, grpname: "{{ group_names }}", tags: ['vrrp','nginxvrrpconfigure'] }
