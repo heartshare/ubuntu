@@ -1,11 +1,15 @@
 # Step 1. Run 2 nodes nginx revers proxy for minio
 0. Fill inventory with correct info (name nodes, ip-nodes)
-0. Install keepalived with running command: ansible-playbook -i ubuntu.inventory nginx_vrrp.yml --tags nginxvrrpinstall
-0. Configure and run keepalived with running command: ansible-playbook -i ubuntu.inventory nginx_vrrp.yml --tags nginxvrrpconfigure
+0. Install keepalived with running command: ansible-playbook -i ubuntu.inventory nginx_vrrp.yml
+0. Install nginx with running command: ansible-playbook -i nginx.yml
 
 # Step 2. Install minio
 0. Fill inventory with correct info (name nodes, ip-nodes)
+0. Install minio with running command: ansible-playbook -i ubuntu.inventory minio.yml --tags minio
 
+# Or install full stack nginx+keepalived+minio with one playbook
+0. Fill inventory with correct info (name nodes, ip-nodes)
+0. Install full stack with running command: ansible-playbook -i ubuntu.inventory minio_full_stack.yml
 
 # add tenant1 to host
 mc config host add tenant1 http://172.0.5.101:9001 zaq1xsw2cde3 123456789
