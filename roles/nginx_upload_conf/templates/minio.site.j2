@@ -1,3 +1,5 @@
+  proxy_cache_path /var/cache/nginx/minio_cache{{ item.tenantid}} levels=1:2 keys_zone=minio_cache{{ item.tenantid}}:10m max_size=10m inactive=60m use_temp_path=off;
+
   upstream backend{{ item.tenantid}} {
    {% for host in groups['ubuntufarm'] %}
     server {{ hostvars[host]['ansible_host'] }}:{{ item.tenantport }} max_fails=2 fail_timeout=10s;
@@ -8,6 +10,15 @@
     listen {{ item.tenantport }};
 
     location / {
+      proxy_cache minio_cache{{ item.tenantid}};
+      add_header X-Cache-Status $upstream_cache_status;
+      proxy_cache_revalidate on;
+      proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+      proxy_cache_lock on;
+      proxy_ignore_headers Set-Cookie;
+      proxy_cache_valid 1m;
+
+      proxy_set_header Host $http_host;
       proxy_pass http://backend{{ item.tenantid }};
     }
   }
