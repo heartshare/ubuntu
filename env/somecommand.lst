@@ -1,0 +1,47 @@
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2 http://172.0.5.151:9002 zaq1xsw2cde3 123456789 --api S3v4'
+ubuntu1 | CHANGED | rc=0 >>
+Added `tenant2` successfully.
+
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc mb tenant2/forpic'
+ubuntu1 | CHANGED | rc=0 >>
+Bucket created successfully `tenant2/forpic`.
+
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cp /tmp/test.jpg tenant2/forpic'
+ubuntu1 | CHANGED | rc=0 >>
+/tmp/test.jpg:  22.22 KiB / 22.22 KiB  100.00% 662.32 KiB/s 0s
+
+# Create user named "user1" with pass "user1user1"
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin user add tenant2 user1 user1user1'
+ubuntu1 | CHANGED | rc=0 >>
+Added user `user1` successfully.
+
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin user add tenant2 user2 user2user2'
+ubuntu1 | CHANGED | rc=0 >>
+Added user `user2` successfully.
+
+root@ubuntu1:/tmp# mc admin policy add tenant2 readAndWrite /tmp/policy.json
+Added policy `readAndWrite` successfully.
+
+root@ubuntu1:/tmp# mc admin policy set tenant2 readAndWrite user=user2
+Policy readAndWrite is set on user `user2`
+
+/tmp/policy.json
+
+root@ubuntu1:/tmp# cat /tmp/policy.json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:GetBucketLocation",
+       "s3:GetObject",
+   "s3:ListAllMyBuckets"
+     ],
+     "Resource": [
+       "arn:aws:s3:::*"
+     ]
+   }
+ ]
+}
+
