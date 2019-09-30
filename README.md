@@ -1,9 +1,12 @@
-# Step 1. Run 2 nodes nginx revers proxy for minio
+# Step 1. Run 2 nodes nginx revers proxy for minio backends
 0. Fill inventory with correct info (name nodes, ip-nodes)
-0. Install keepalived with running command: ansible-playbook -i ubuntu.inventory nginx_vrrp.yml
 0. Install nginx with running command: ansible-playbook -i nginx.yml
 
-# Step 2. Install minio
+# Step 1. Run 2 nodes keepalived for HA nginx revers proxy
+0. Fill inventory with correct info (name nodes, ip-nodes)
+0. Install keepalived with running command: ansible-playbook -i ubuntu.inventory nginx_vrrp.yml
+
+# Step 3. Install minio
 0. Fill inventory with correct info (name nodes, ip-nodes)
 0. Install minio with running command: ansible-playbook -i ubuntu.inventory minio.yml --tags minio
 
