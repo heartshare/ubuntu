@@ -19,3 +19,6 @@
   service:
     name: minio
     state: restarted
+  with_items:
+    - minio@1
+    - minio@2
