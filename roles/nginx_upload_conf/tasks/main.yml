@@ -1,13 +1,18 @@
 ---
-- name: Upload conf
+- name: Replace default nginx.conf 
   template:
     src: nginx.conf.j2
-    dest: /etc/nginx.conf
+    dest: /etc/nginx/nginx.conf
 
-- name: Upload conf
+- name: Create dir for custom conf
+  file:
+    name: /etc/nginx/sites-available
+    state: directory
+
+- name: Upload conf for minio
   template:
     src: minio.site.j2
-    dest: /etc/nginx/sites-enabled/minio{{ item.tenantid }}
+    dest: /etc/nginx/sites-available/minio{{ item.tenantid }}
   with_items:
     - { tenantid: 1, tenantport: 9001}
     - { tenantid: 2, tenantport: 9002}
