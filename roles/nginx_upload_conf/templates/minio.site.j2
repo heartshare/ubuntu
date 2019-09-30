@@ -1,5 +1,4 @@
   upstream backend{{ item.tenantid}} {
-   random;
    {% for host in groups['backendnodes'] %}
     server {{ hostvars[host]['ansible_host'] }}:{{ item.tenantport }} max_fails=2 fail_timeout=10s;
    {% endfor %}
