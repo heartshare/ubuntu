@@ -3,7 +3,7 @@
 - name: Init vars
   set_fact:
     host_lines: |
-      {% for node in groups['mtenant1'] %}
+      {% for node in groups['ubuntufarm'] %}
       {{ hostvars[node]['ansible_host'] }} {{ hostvars[node]['inventory_hostname'] }}
       {% endfor %}
 

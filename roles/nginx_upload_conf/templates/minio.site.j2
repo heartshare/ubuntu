@@ -1,5 +1,5 @@
   upstream backend{{ item.tenantid}} {
-   {% for host in groups['backendnodes'] %}
+   {% for host in groups['ubuntufarm'] %}
     server {{ hostvars[host]['ansible_host'] }}:{{ item.tenantport }} max_fails=2 fail_timeout=10s;
    {% endfor %}
   }
