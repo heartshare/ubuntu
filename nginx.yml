@@ -2,7 +2,6 @@
 - hosts: nginxsrv
   gather_facts: yes
   roles:
-    - { role: dummy, tags: ['dummy'] }
     - { role: nginx_add_hosts, tags: ['nginx','hosts'] }
-    - { role: nginx_install, tags: ['nginx','nginxinstall'] }
+    - { role: nginx_install, tags: ['nginx','install'] }
     - { role: nginx_upload_conf, tags: ['nginx','conf'] }

@@ -1,7 +1,0 @@
----
-#- set_fact:
-#    node_list: "{% for host in groups['backendnodes'] %} server {{ hostvars[host].ansible_host }};\r\n{% endfor %}"
-#
-#- debug:
-#    msg: "{{ node_list }}"
-
