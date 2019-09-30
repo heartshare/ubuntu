@@ -14,6 +14,12 @@
 0. Fill inventory with correct info (name nodes, ip-nodes)
 0. Install full stack with running command: ansible-playbook -i ubuntu.inventory minio_full_stack.yml
 
+# Add remote host minio to config trought by nginx-balancer
+If you want work from minio by cli by nginx balancer nodes
+0. Copy mc to /usr/sbin/
+0. Set execute flag to mc
+0. Add remote minio host to local config:  mcminio config host add minio http://172.0.5.151:9001 zaq1xsw2cde3 123456789 --api S3v4 
+
 # add tenant1 to host
 mc config host add tenant1 http://172.0.5.101:9001 zaq1xsw2cde3 123456789
 
