@@ -102,8 +102,8 @@ ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user 
 0. Login into ubuntu1
 0. Upload python script
 0. Make thet script executable: chmod +x get_file.py
-0. Run python script: ./get_file.py (Enter)
-root@ubuntu1:~# ./get_file.py
+0. Run python script: get_file.py (Enter)
+root@ubuntu1:~# get_file.py
 root@ubuntu1:~# ls -l
 total 96
 -rwxr-xr-x 1 root root   526 Oct  1 06:20 get_file.py
