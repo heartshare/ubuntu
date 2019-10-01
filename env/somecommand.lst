@@ -9,7 +9,7 @@ ubuntu1 | CHANGED | rc=0 >>
 Bucket created successfully `tenant2/forpic`.
 ---
 # Upload new file into created bucket
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cp /tmp/test.jpg tenant2/forpic'
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cp /tmp/intest.jpg tenant2/forpic'
 ubuntu1 | CHANGED | rc=0 >>
 /tmp/test.jpg:  22.22 KiB / 22.22 KiB  100.00% 662.32 KiB/s 0s
 ---
@@ -63,5 +63,5 @@ Policy readAndWrite is set on user `user1`
 ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user http://172.0.5.101:9002 user1 user1user1 --api s3v4'
 ---
 # Read file in bucket forpic
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cat tenant2/forpic/test.jpg'
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cat tenant2/forpic/intest.jpg'
 
