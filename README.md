@@ -79,7 +79,7 @@ ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user 
 ### Get file from bucket forpic
 0. Login into ubuntu1
 0. Upload python script
-0. Make they executable: chmod +x get_file.py
+0. Make thet script executable: chmod +x get_file.py
 0. Run python script: ./get_file.py (Enter)
 root@ubuntu1:~# ./get_file.py
 root@ubuntu1:~# ls -l
