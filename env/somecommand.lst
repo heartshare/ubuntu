@@ -1,5 +1,5 @@
 # Add new host to config
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2 http://172.0.5.151:9002 zaq1xsw2cde3 123456789 --api S3v4'
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2 http://172.0.5.101:9002 zaq1xsw2cde3 123456789 --api S3v4'
 ubuntu1 | CHANGED | rc=0 >>
 Added `tenant2` successfully.
 ---
@@ -60,7 +60,7 @@ ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy set tenant2 rea
 Policy readAndWrite is set on user `user1`
 ---
 # Add user1 to config
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user http://172.0.5.151:9002 user1 user1user1 --api s3v4'
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user http://172.0.5.101:9002 user1 user1user1 --api s3v4'
 ---
 # Read file in bucket forpic
 ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cat tenant2/forpic/test.jpg'
