@@ -17,12 +17,13 @@ ubuntu1 | CHANGED | rc=0 >>
 ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin user add tenant2 user1 user1user1'
 ubuntu1 | CHANGED | rc=0 >>
 Added user `user1` successfully.
+
 ---
-# Set policy to user for tenant2
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy set tenant2 readAndWrite user=user1'
+# Add policy for tenant2
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy add tenant2 readAndWrite /tmp/policy.json'
 ubuntu1 | CHANGED | rc=0 >>
-Policy readAndWrite is set on user `user1`
---
+Added policy `readAndWrite` successfully.
+
 /tmp/policy.json
 root@ubuntu1:/tmp# cat /tmp/policy.json
 {
@@ -41,10 +42,10 @@ root@ubuntu1:/tmp# cat /tmp/policy.json
  ]
 }
 ---
-# Add policy for tenant2
-ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy add tenant2 readAndWrite /tmp/policy.json'
+# Set policy to user for tenant2
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy set tenant2 readAndWrite user=user1'
 ubuntu1 | CHANGED | rc=0 >>
-Added policy `readAndWrite` successfully.
+Policy readAndWrite is set on user `user1`
 ---
 # List all policy for tenant2 (lists maybe look different
 ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy list tenant2'
