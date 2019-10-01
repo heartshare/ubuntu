@@ -20,20 +20,69 @@ If you want work from minio by cli by nginx balancer nodes
 0. Set execute flag to mc
 0. Add remote minio host to local config:  mcminio config host add minio http://172.0.5.151:9001 zaq1xsw2cde3 123456789 --api S3v4 
 
-# add tenant1 to host
-mc config host add tenant1 http://172.0.5.101:9001 zaq1xsw2cde3 123456789
+# Play with user & files
+## Add new host to config
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2 http://172.0.5.101:9002 zaq1xsw2cde3 123456789 --api S3v4'
+ubuntu1 | CHANGED | rc=0 >>
+Added `tenant2` successfully.
 
-# list bucket in tenant1
-mc ls tenant1
+## Create new bucket in tenant2
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc mb tenant2/forpic'
+ubuntu1 | CHANGED | rc=0 >>
+Bucket created successfully `tenant2/forpic`.
 
-# remove tenant2 from host
-mc config host rm tenant2
+## Upload new file into created bucket
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc cp /tmp/intest.jpg tenant2/forpic'
+ubuntu1 | CHANGED | rc=0 >>
+/tmp/intest.jpg:  22.22 KiB / 22.22 KiB  100.00% 662.32 KiB/s 0s
 
-# create bucket in tenant1
-mc mb tenant1/clicreate
+## Create user named "user1" with pass "user1user1"
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin user add tenant2 user1 user1user1'
+ubuntu1 | CHANGED | rc=0 >>
+Added user `user1` successfully.
 
-# upload file 'syslog' into tenant/bucket
-mc cp /var/log/syslog tenant1/forpic
+## Add policy for tenant2
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy add tenant2 readAndWrite /tmp/policy.json'
+ubuntu1 | CHANGED | rc=0 >>
+Added policy `readAndWrite` successfully.
 
-# remove file 'syslog' from tenant/bucket
-mc rm tenant1/forpic/syslog
+/tmp/policy.json
+root@ubuntu1:/tmp# cat /tmp/policy.json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:*",
+   "s3:ListAllMyBuckets"
+     ],
+     "Resource": [
+       "arn:aws:s3:::*"
+     ]
+   }
+ ]
+}
+
+## Set policy to user for tenant2
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy set tenant2 readAndWrite user=user1'
+ubuntu1 | CHANGED | rc=0 >>
+Policy readAndWrite is set on user `user1`
+
+## Attach policy readAndWrite to user1
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy set tenant2 readAndWrite user=user1'
+Policy readAndWrite is set on user `user1`
+
+## Add user1 to config
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user http://172.0.5.101:9002 user1 user1user1 --api s3v4'
+
+## Get file from bucket forpic
+0. Login into ubuntu1
+0. Upload python script
+0. Make they executable: chmod +x get_file.py
+0. Run python script: ./get_file.py (Enter)
+root@ubuntu1:~# ./get_file.py
+root@ubuntu1:~# ls -l
+total 96
+-rwxr-xr-x 1 root root   526 Oct  1 06:20 get_file.py
+0. Try open new file: outtest.jpg
