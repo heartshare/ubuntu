@@ -111,4 +111,8 @@ ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc config host add tenant2user 
 ls -l
 -rwxr-xr-x 1 root root   526 Oct  1 06:20 get_file.py
 ```
-0. Try open new file: outtest.jpg
+```
+ls -l outtest1.jpg
+-rw-r--r-- 1 root root 21749 Oct  1 06:20 outtest1.jpg
+```
+
