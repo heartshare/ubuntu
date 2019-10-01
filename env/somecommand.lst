@@ -45,3 +45,11 @@ root@ubuntu1:/tmp# cat /tmp/policy.json
 ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy add tenant2 readAndWrite /tmp/policy.json'
 ubuntu1 | CHANGED | rc=0 >>
 Added policy `readAndWrite` successfully.
+
+# List all policy for tenant2 (lists maybe look different
+ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy list tenant2'
+ubuntu1 | CHANGED | rc=0 >>
+readwrite
+writeonly
+readAndWrite
+readonly
