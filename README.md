@@ -62,8 +62,10 @@ ansible -i ubuntu.inventory ubuntu1 -m shell -a 'mc admin policy add tenant2 rea
 ubuntu1 | CHANGED | rc=0 >>
 Added policy `readAndWrite` successfully.
 
-/tmp/policy.json
-root@ubuntu1:/tmp# cat /tmp/policy.json
+```
+cat /tmp/policy.json
+```
+``` json
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -79,6 +81,7 @@ root@ubuntu1:/tmp# cat /tmp/policy.json
    }
  ]
 }
+```
 
 ### Set policy to user for tenant2
 ```
