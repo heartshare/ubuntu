@@ -34,8 +34,7 @@ root@ubuntu1:/tmp# cat /tmp/policy.json
    {
      "Effect": "Allow",
      "Action": [
-       "s3:GetBucketLocation",
-       "s3:GetObject",
+       "s3:*",
    "s3:ListAllMyBuckets"
      ],
      "Resource": [
