@@ -2,7 +2,7 @@
 0. Fill inventory with correct info (name nodes, ip-nodes - in section [nginxsrv], ubuntu.inventory)
 0. Install nginx with running command: 
 ```
-ansible-playbook -i nginx.yml
+ansible-playbook -i ubuntu.inventory nginx.yml
 ```
 
 # Step 1. Run 2 nodes keepalived for HA nginx revers proxy
