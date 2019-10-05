@@ -1,0 +1,9 @@
+---
+- name: Upload go server to nodes into /usr/sbin
+  copy:
+    src: httpgoweb
+    dest: /usr/sbin
+    owner: root
+    group: root
+    mode: 0744
+
