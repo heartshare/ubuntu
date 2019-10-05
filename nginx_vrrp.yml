@@ -4,3 +4,4 @@
   roles:
     - { role: nginx_vrrp_install, tags: ['vrrp','nginxvrrpinstall'] }
     - { role: nginx_vrrp_configure, tags: ['vrrp','nginxvrrpconfigure'] }
+    - { role: vrrp_check_features, tags: ['vrrp','vrrpcheck'] }
